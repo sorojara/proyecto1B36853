@@ -1,0 +1,2 @@
+#ifndef MYHEADER
+#define MYHEADER

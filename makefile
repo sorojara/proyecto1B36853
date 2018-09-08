@@ -1,6 +1,6 @@
 
 CC = g++
-OPTS = -c -std=c++14 -Iinclude/
+OPTS = -Wall -c -std=c++14 -Iinclude/
 
 
 
