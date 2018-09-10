@@ -22,6 +22,7 @@ void AVLtree::rotLL(nodo *punto){
   bufferZ -> LC = bufferGeneral;
   bufferY -> LC = bufferX;
   //falta asignar como hijo de padre
+  //falta asignar padres
 }
 
 void AVLtree::rotRR(nodo *punto){
@@ -34,12 +35,41 @@ void AVLtree::rotRR(nodo *punto){
   bufferZ -> RC = bufferGeneral;
   bufferY -> LC = bufferZ;
   //falta asignar como hijo de padre
+  //falta asignar padres
+}
+
+void AVLtree::rotRL(nodo *punto){
+  //nodo *padre = punto -> Parent;
+  nodo *bufferY = punto -> RC;
+  nodo *bufferX = bufferY -> RC;
+  nodo *bufferZ = punto;
+  nodo *bufferGeneral = bufferX -> RC;
+  bufferZ -> RC = bufferX;
+  bufferX -> RC = bufferY;
+  bufferY -> LC = bufferGeneral;
+  rotRR(bufferZ);
+  //falta asignar como hijo de padre
+  //falta asignar padres
+}
+
+void AVLtree::rotLR(nodo *punto){
+  //nodo *padre = punto -> Parent;
+  nodo *bufferY = punto -> RC;
+  nodo *bufferX = bufferY -> RC;
+  nodo *bufferZ = punto;
+  nodo *bufferGeneral = bufferX -> LC;
+  bufferZ -> LC = bufferX;
+  bufferX -> LC = bufferY;
+  bufferY -> RC = bufferGeneral;
+  rotLL(bufferZ);
+  //falta asignar como hijo de padre
+  //falta asignar padres
 }
 
 
 
 
-//Parar pruebas de compilacion
+//Para pruebas de compilacion
 int main()
 {
     return 0;

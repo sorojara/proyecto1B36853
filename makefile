@@ -28,8 +28,11 @@ $(OBJDIR)/%.o: $(SRCDIR)/%.cpp
 clean:
 	rm $(PROJECT) $(OBJDIR) -Rf
 
-buildrepo:
-	@$(call make-repo)
+git:
+	make clean
+	git add *
+	git commit -m "Upload automatico de Makefile"
+	git push
 
 
 define make-repo

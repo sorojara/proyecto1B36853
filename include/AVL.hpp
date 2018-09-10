@@ -12,7 +12,7 @@ class nodo
   {
   public:
     int data;
-    //int k;
+    int k;
     int h;
     string nombre;
     nodo *LC;
@@ -30,6 +30,8 @@ public:
   AVLtree();
   void rotLL(nodo *punto);
   void rotRR(nodo *punto);
+  void rotRL(nodo *punto);
+  void rotLR(nodo *punto);
 };
 
 #endif
