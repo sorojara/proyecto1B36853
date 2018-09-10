@@ -8,9 +8,12 @@
 #include <math.h>
 using namespace std;
 
-struct nodo
+class nodo
   {
+  public:
     int data;
+    //int k;
+    int h;
     string nombre;
     nodo *LC;
     nodo *RC;
@@ -25,7 +28,8 @@ private:
 
 public:
   AVLtree();
-
+  void rotLL(nodo *punto);
+  void rotRR(nodo *punto);
 };
 
 #endif

@@ -12,6 +12,30 @@ AVLtree::AVLtree(){
   root = NULL;
 }
 
+void AVLtree::rotLL(nodo *punto){
+  nodo *padre = punto -> Parent;
+  nodo *bufferY = punto -> LC;
+  nodo *bufferX = bufferY -> LC;
+  nodo *bufferZ = punto;
+  nodo *bufferGeneral = bufferY -> RC;
+  bufferY -> RC = bufferZ;
+  bufferZ -> LC = bufferGeneral;
+  bufferY -> LC = bufferX;
+  //falta asignar como hijo de padre
+}
+
+void AVLtree::rotRR(nodo *punto){
+  nodo *padre = punto -> Parent;
+  nodo *bufferY = punto -> RC;
+  nodo *bufferX = bufferY -> RC;
+  nodo *bufferZ = punto;
+  nodo *bufferGeneral = bufferY -> LC;
+  bufferY -> RC = bufferX;
+  bufferZ -> RC = bufferGeneral;
+  bufferY -> LC = bufferZ;
+  //falta asignar como hijo de padre
+}
+
 
 
 
