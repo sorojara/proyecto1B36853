@@ -31,7 +31,8 @@ clean:
 git:
 	make clean
 	git add *
-	git commit -m "Upload automatico de Makefile"
+	read mensaje
+	git commit -m mensaje
 	git push
 
 
