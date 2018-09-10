@@ -1,11 +1,22 @@
 #include <iostream>
-#include "AVL.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <ctype.h>
+#include <math.h>
+#include "AVL.hpp"
 
-struct nodo
-  {
-    int data;
-    string nombre;
-    nodo *LC;
-    nodo *RC;
-    nodo *Parent;
-  };
+
+using namespace std;
+
+AVLtree::AVLtree(){
+  root = NULL;
+}
+
+
+
+
+//Parar pruebas de compilacion
+int main()
+{
+    return 0;
+}

@@ -1,10 +1,10 @@
 
 CC = g++
-OPTS = -Wall -c -std=c++14 -Iinclude/
+OPTS = -std=c++14 -Iinclude/
 
 
 
-PROJECT = application_name
+PROJECT = soremesis420
 
 
 OBJDIR = build
