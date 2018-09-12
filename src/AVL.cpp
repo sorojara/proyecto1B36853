@@ -35,6 +35,12 @@ AVLtree::AVLtree(){
   root = NULL;
 }
 
+AVLtree::AVLtree(string const nom, int const ced){
+  nodo raiz = nodo(nom, ced);
+  root = &raiz;
+  //root = &nodo(nom, ced);
+}
+
 void AVLtree::rotLL(nodo *punto){
   nodo *padre = punto -> Parent;
   nodo *bufferY = punto -> LC;
@@ -128,5 +134,6 @@ void AVLtree::rotLR(nodo *punto){
 //Para pruebas de compilacion
 int main()
 {
-    return 0;
+
+  return 0;
 }

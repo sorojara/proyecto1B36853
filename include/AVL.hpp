@@ -20,6 +20,7 @@ class nodo
     nodo *Parent;
     nodo(string nom, int ced);
     nodo(string nom, int ced, nodo *pad);
+
   };
 
 class AVLtree
@@ -30,6 +31,7 @@ private:
 
 public:
   AVLtree();
+  AVLtree(string nom, int ced);
   void rotLL(nodo *punto);
   void rotRR(nodo *punto);
   void rotRL(nodo *punto);
