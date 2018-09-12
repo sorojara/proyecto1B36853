@@ -27,7 +27,7 @@ nodo::nodo(string nom, int ced, nodo *pad){
   if (data > pad -> data) {
     pad -> RC = this;
   } else {
-    padre -> LC = this;
+    pad -> LC = this;
   }
 }
 
@@ -79,7 +79,7 @@ void AVLtree::rotRR(nodo *punto){
 }
 
 void AVLtree::rotRL(nodo *punto){
-  //nodo *padre = punto -> Parent;
+  nodo *padre = punto -> Parent;
   nodo *bufferY = punto -> RC;
   nodo *bufferX = bufferY -> LC;
   nodo *bufferZ = punto;
@@ -101,7 +101,7 @@ void AVLtree::rotRL(nodo *punto){
 }
 
 void AVLtree::rotLR(nodo *punto){
-  //nodo *padre = punto -> Parent;
+  nodo *padre = punto -> Parent;
   nodo *bufferY = punto -> LC;
   nodo *bufferX = bufferY -> RC;
   nodo *bufferZ = punto;
