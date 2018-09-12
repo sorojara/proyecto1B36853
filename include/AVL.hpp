@@ -12,7 +12,7 @@ class nodo
   {
   public:
     int data;
-    int k;
+    //int k;
     int h;
     string nombre;
     nodo *LC;
