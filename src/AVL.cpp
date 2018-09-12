@@ -8,6 +8,29 @@
 
 using namespace std;
 
+nodo::nodo(string nom, int ced){
+  data = ced;
+  nombre = nom;
+  LC = NULL;
+  RC = NULL;
+  Parent = NULL;
+  h=1;
+}
+
+nodo::nodo(string nom, int ced, nodo *pad){
+  data = ced;
+  nombre = nom;
+  LC = NULL;
+  RC = NULL;
+  Parent = pad;
+  h=(pad -> h) + 1;
+  if (data > pad -> data) {
+    pad -> RC = this;
+  } else {
+    padre -> LC = this;
+  }
+}
+
 AVLtree::AVLtree(){
   root = NULL;
 }

@@ -18,6 +18,8 @@ class nodo
     nodo *LC;
     nodo *RC;
     nodo *Parent;
+    nodo(string nom, int ced);
+    nodo(string nom, int ced, nodo *pad);
   };
 
 class AVLtree

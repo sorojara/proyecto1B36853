@@ -28,6 +28,9 @@ $(OBJDIR)/%.o: $(SRCDIR)/%.cpp
 clean:
 	rm $(PROJECT) $(OBJDIR) -Rf
 
+buildrepo:
+	@$(call make-repo)
+
 git:
 	make clean
 	git add *
