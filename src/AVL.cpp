@@ -80,12 +80,17 @@ void AVLtree::rotRR(nodo *punto){
   bufferGeneral -> Parent = bufferZ;
   bufferY -> LC = bufferZ;
   bufferZ -> Parent = bufferY;
-  if (bufferY -> data > padre -> data) {
-    padre -> RC = bufferY;
+  if (padre -> Parent == NULL) {
+    bufferY -> Parent = NULL;
+    root = bufferY;
   } else {
-    padre -> LC = bufferY;
+    if (bufferY -> data > padre -> data) {
+      padre -> RC = bufferY;
+    } else {
+      padre -> LC = bufferY;
+    }
+    bufferY -> Parent = padre;
   }
-  bufferY -> Parent = padre;
   //agregar un actualizador de H recursivo
 }
 
@@ -102,12 +107,17 @@ void AVLtree::rotRL(nodo *punto){
   bufferY -> LC = bufferGeneral;
   bufferGeneral -> Parent = bufferY;
   rotRR(bufferZ);
-  if (bufferY -> data > padre -> data) {
-    padre -> RC = bufferY;
+  if (padre -> Parent == NULL) {
+    bufferY -> Parent = NULL;
+    root = bufferY;
   } else {
-    padre -> LC = bufferY;
+    if (bufferY -> data > padre -> data) {
+      padre -> RC = bufferY;
+    } else {
+      padre -> LC = bufferY;
+    }
+    bufferY -> Parent = padre;
   }
-  bufferY -> Parent = padre;
   //agregar un actualizador de H recursivo
 }
 
@@ -124,12 +134,17 @@ void AVLtree::rotLR(nodo *punto){
   bufferY -> RC = bufferGeneral;
   bufferGeneral -> Parent = bufferY;
   rotLL(bufferZ);
-  if (bufferY -> data > padre -> data) {
-    padre -> RC = bufferY;
+  if (padre -> Parent == NULL) {
+    bufferY -> Parent = NULL;
+    root = bufferY;
   } else {
-    padre -> LC = bufferY;
+    if (bufferY -> data > padre -> data) {
+      padre -> RC = bufferY;
+    } else {
+      padre -> LC = bufferY;
+    }
+    bufferY -> Parent = padre;
   }
-  bufferY -> Parent = padre;
   //agregar un actualizador de H recursivo
 }
 
