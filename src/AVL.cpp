@@ -53,12 +53,17 @@ void AVLtree::rotLL(nodo *punto){
   bufferGeneral -> Parent = bufferZ;
   bufferY -> LC = bufferX;
   bufferX -> Parent = bufferY;
-  if (bufferY -> data > padre -> data) {
-    padre -> RC = bufferY;
+  if (padre -> Parent == NULL) {
+    bufferY -> Parent = NULL;
+    root = bufferY;
   } else {
-    padre -> LC = bufferY;
+    if (bufferY -> data > padre -> data) {
+      padre -> RC = bufferY;
+    } else {
+      padre -> LC = bufferY;
+    }
+    bufferY -> Parent = padre;
   }
-  bufferY -> Parent = padre;
   //agregar un actualizador de H recursivo
 
 }
