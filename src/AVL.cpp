@@ -31,13 +31,39 @@ nodo::nodo(string nom, int ced, nodo *pad){
   }
 }
 
+void nodo::printInfo(){ //arreglar print de nulls
+  std::cout << "Cedula: " << data << '\n';
+  std::cout << "Nombre: " << nombre << '\n';
+  //std::cout << "Altura: " << h << '\n';
+  if (Parent == NULL) {
+    std::cout << "Padre: ES NODO RAIZ" << endl;
+  } else {
+    std::cout << "Padre: " << Parent -> nombre << '\n';
+  }
+
+
+  if (LC == NULL) {
+    std::cout << "LC: no hay hijo izquierdo " << endl;
+  } else {
+    std::cout << "LC: " << LC -> nombre << endl;
+  }
+
+  if (RC == NULL) {
+    std::cout << "RC: no hay hijo derecho " << endl;
+  } else {
+    std::cout << "RC: " << RC -> nombre << endl;
+  }
+
+
+}
+
 AVLtree::AVLtree(){
   root = NULL;
 }
 
 AVLtree::AVLtree(string const nom, int const ced){
-  nodo raiz = nodo(nom, ced);
-  root = &raiz;
+  root = new nodo (nom, ced);
+  //cout << (void*)this << endl;
   //root = &nodo(nom, ced);
 }
 
@@ -50,10 +76,12 @@ void AVLtree::rotLL(nodo *punto){
   bufferY -> RC = bufferZ;
   bufferZ -> Parent = bufferY;
   bufferZ -> LC = bufferGeneral;
-  bufferGeneral -> Parent = bufferZ;
+  if (bufferGeneral!=NULL) {
+    bufferGeneral -> Parent = bufferZ;
+  }
   bufferY -> LC = bufferX;
   bufferX -> Parent = bufferY;
-  if (padre -> Parent == NULL) {
+  if (padre  == NULL) {
     bufferY -> Parent = NULL;
     root = bufferY;
   } else {
@@ -77,10 +105,12 @@ void AVLtree::rotRR(nodo *punto){
   bufferY -> RC = bufferX;
   bufferX -> Parent = bufferY;
   bufferZ -> RC = bufferGeneral;
-  bufferGeneral -> Parent = bufferZ;
+  if (bufferGeneral!=NULL) {
+    bufferGeneral -> Parent = bufferZ;
+  }
   bufferY -> LC = bufferZ;
   bufferZ -> Parent = bufferY;
-  if (padre -> Parent == NULL) {
+  if (padre  == NULL) {
     bufferY -> Parent = NULL;
     root = bufferY;
   } else {
@@ -105,16 +135,18 @@ void AVLtree::rotRL(nodo *punto){
   bufferX -> RC = bufferY;
   bufferY -> Parent = bufferX;
   bufferY -> LC = bufferGeneral;
-  bufferGeneral -> Parent = bufferY;
+  if (bufferGeneral!=NULL) {
+    bufferGeneral -> Parent = bufferY;
+  }
   rotRR(bufferZ);
-  if (padre -> Parent == NULL) {
-    bufferY -> Parent = NULL;
-    root = bufferY;
+  if (padre  == NULL) {
+    bufferX -> Parent = NULL;
+    root = bufferX;
   } else {
-    if (bufferY -> data > padre -> data) {
-      padre -> RC = bufferY;
+    if (bufferX -> data > padre -> data) {
+      padre -> RC = bufferX;
     } else {
-      padre -> LC = bufferY;
+      padre -> LC = bufferX;
     }
     bufferY -> Parent = padre;
   }
@@ -132,16 +164,18 @@ void AVLtree::rotLR(nodo *punto){
   bufferX -> LC = bufferY;
   bufferY -> Parent = bufferX;
   bufferY -> RC = bufferGeneral;
-  bufferGeneral -> Parent = bufferY;
+  if (bufferGeneral!=NULL) {
+    bufferGeneral -> Parent = bufferY;
+  }
   rotLL(bufferZ);
-  if (padre -> Parent == NULL) {
-    bufferY -> Parent = NULL;
-    root = bufferY;
+  if (padre  == NULL) {
+    bufferX -> Parent = NULL;
+    root = bufferX;
   } else {
-    if (bufferY -> data > padre -> data) {
-      padre -> RC = bufferY;
+    if (bufferX -> data > padre -> data) {
+      padre -> RC = bufferX;
     } else {
-      padre -> LC = bufferY;
+      padre -> LC = bufferX;
     }
     bufferY -> Parent = padre;
   }
@@ -151,9 +185,70 @@ void AVLtree::rotLR(nodo *punto){
 
 
 
+
 //Para pruebas de compilacion
 int main()
 {
+  AVLtree prueba("soro", 420);
+  //cout << (void*)prueba.root << endl;
+  //prueba.root -> printInfo();
+  prueba.root -> LC = new nodo ("espeon", 69, prueba.root);
+  prueba.root -> LC -> LC = new nodo ("Umbreon", 42, prueba.root -> LC);
+
+  std::cout << "________________________" << '\n';
+  std::cout << "PRUEBA 1:" << '\n';
+  std::cout << "________________________" << '\n';
+  prueba.root -> printInfo();
+  std::cout << "________________________" << '\n';
+  prueba.root -> LC -> printInfo();
+  std::cout << "________________________" << '\n';
+  prueba.root -> LC -> LC -> printInfo();
+  std::cout << "________________________" << '\n';
+
+  prueba.rotLL(prueba.root);
+
+  std::cout << "________________________" << '\n';
+  std::cout << "PRUEBA 2 (LL):" << '\n';
+  std::cout << "________________________" << '\n';
+  prueba.root -> printInfo();
+  std::cout << "________________________" << '\n';
+  prueba.root -> LC -> printInfo();
+  std::cout << "________________________" << '\n';
+  prueba.root -> RC -> printInfo();
+  std::cout << "________________________" << '\n';
+
+  prueba.root -> RC -> RC = new nodo ("Victor", 666, prueba.root -> RC);
+
+
+  prueba.rotRR(prueba.root);
+  std::cout << "________________________" << '\n';
+  std::cout << "PRUEBA 3 (RR):" << '\n';
+  std::cout << "________________________" << '\n';
+  prueba.root -> printInfo();
+  std::cout << "________________________" << '\n';
+  prueba.root -> LC -> printInfo();
+  std::cout << "________________________" << '\n';
+  prueba.root -> RC -> printInfo();
+  std::cout << "________________________" << '\n';
+  prueba.root -> LC -> LC -> printInfo();
+  std::cout << "________________________" << '\n';
+
+  prueba.root -> LC -> RC = new nodo ("Kurt Bernard", 77, prueba.root -> LC);
+  prueba.rotLR(prueba.root);
+
+  std::cout << "________________________" << '\n';
+  std::cout << "PRUEBA 4 (LR):" << '\n';
+  std::cout << "________________________" << '\n';
+  prueba.root -> printInfo();
+  std::cout << "________________________" << '\n';
+  prueba.root -> LC -> printInfo();
+  std::cout << "________________________" << '\n';
+  prueba.root -> RC -> printInfo();
+  std::cout << "________________________" << '\n';
+  prueba.root -> LC -> LC -> printInfo();
+  std::cout << "________________________" << '\n';
+  prueba.root -> RC -> RC -> printInfo();
+  std::cout << "________________________" << '\n';
 
   return 0;
 }

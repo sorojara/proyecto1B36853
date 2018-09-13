@@ -11,6 +11,7 @@ using namespace std;
 class nodo
   {
   public:
+    void printInfo();
     int data;
     //int k;
     int h;
@@ -25,11 +26,9 @@ class nodo
 
 class AVLtree
 {
-private:
-
-  nodo *root;
-
+//private:
 public:
+  nodo *root;
   AVLtree();
   AVLtree(string nom, int ced);
   void rotLL(nodo *punto);
