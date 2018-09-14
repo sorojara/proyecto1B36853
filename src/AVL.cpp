@@ -250,5 +250,25 @@ int main()
   prueba.root -> RC -> RC -> printInfo();
   std::cout << "________________________" << '\n';
 
+  prueba.root -> RC -> LC = new nodo ("Helber", 100, prueba.root -> RC);
+  prueba.rotRL(prueba.root);
+
+  std::cout << "________________________" << '\n';
+  std::cout << "PRUEBA 5 (RL):" << '\n';
+  std::cout << "________________________" << '\n';
+  prueba.root -> printInfo();
+  std::cout << "________________________" << '\n';
+  prueba.root -> LC -> printInfo();
+  std::cout << "________________________" << '\n';
+  prueba.root -> RC -> printInfo();
+  std::cout << "________________________" << '\n';
+  prueba.root -> LC -> LC -> printInfo();
+  std::cout << "________________________" << '\n';
+  prueba.root -> RC -> RC -> printInfo();
+  std::cout << "________________________" << '\n';
+  prueba.root -> LC -> LC -> LC -> printInfo();
+  std::cout << "________________________" << '\n';
+
+
   return 0;
 }
