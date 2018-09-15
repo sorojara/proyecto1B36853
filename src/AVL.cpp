@@ -228,7 +228,7 @@ nodo *AVLtree::checkK(nodo *punto, queue <int> dirs){//dirs[i]=0-->NO ASIGNADO; 
 }
 
 void AVLtree::actualizarH(nodo *punto){
-  if (punto == NULL) {
+  if (punto != NULL) {
     if (punto -> LC == NULL) {
       punto -> hI = 0;
     } else {
@@ -243,6 +243,71 @@ void AVLtree::actualizarH(nodo *punto){
 
   } else {
     //haga algo
+  }
+}
+
+nodo *AVLtree::encontrarPosicion(string nom, int ced, nodo *punto){
+  nodo *buffer = NULL;
+  int lado = 0;
+  if (ced > punto -> data) {
+    buffer = punto -> RC;
+    lado = 2;
+  } else {
+    buffer = punto -> LC;
+    lado = 1;
+  }
+  if (buffer == NULL) {
+    buffer = new nodo(nom, ced, punto);
+    if (lado == 2) {
+      punto -> RC = buffer;
+      return punto -> RC;
+    } else {
+      punto -> LC = buffer;
+      return punto -> LC;
+    }
+  } else {
+    return encontrarPosicion(nom, ced, buffer);
+  }
+}
+
+
+void AVLtree::ubicar(string nom, int ced){
+  if (root == NULL){
+    root = new nodo (nom, ced);
+  }else{
+    nodo *buffer = encontrarPosicion(nom, ced, root);
+    actualizarH(buffer);
+    queue <int> cola;
+    nodo *buffer2 = checkK(buffer, cola);
+    if (buffer2 != NULL) {
+      //actualizar hs de hijo izquierdo
+      if (buffer2 -> LC -> LC == NULL) {
+        buffer2 -> LC -> hI = 0;
+      } else {
+        buffer2 -> LC -> hI = std::max(buffer2 -> LC -> LC ->hI, buffer2 -> LC -> LC ->hD)+1;
+      }
+      if (buffer2 -> LC -> RC == NULL) {
+        buffer2 -> LC -> hD = 0;
+      } else {
+        buffer2 -> LC -> hD = std::max(buffer2 -> LC -> RC ->hI, buffer2 -> LC -> RC ->hD)+1;
+      }
+
+      //actualizar hs de hijo derecho
+      if (buffer2 -> RC -> LC == NULL) {
+        buffer2 -> RC -> hI = 0;
+      } else {
+        buffer2 -> RC -> hI = std::max(buffer2 -> RC -> LC ->hI, buffer2 -> RC -> LC ->hD)+1;
+      }
+      if (buffer2 -> RC -> RC == NULL) {
+        buffer2 -> RC -> hD = 0;
+      } else {
+        buffer2 -> RC -> hD = std::max(buffer2 -> RC -> RC ->hI, buffer2 -> RC -> RC ->hD)+1;
+      }
+      actualizarH(buffer2);
+    } else {
+      //actualizarH(buffer);
+    }
+
   }
 }
 

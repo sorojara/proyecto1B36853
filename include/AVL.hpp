@@ -38,6 +38,8 @@ public:
   void rotLR(nodo *punto);
   nodo *checkK(nodo *punto, queue <int> dirs);
   void actualizarH(nodo *punto);
+  void ubicar(string nom, int ced);
+  nodo *encontrarPosicion(string nom, int ced, nodo *punto);
 };
 
 #endif
