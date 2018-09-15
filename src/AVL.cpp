@@ -4,6 +4,7 @@
 #include <ctype.h>
 #include <math.h>
 #include <queue>
+#include <algorithm>//std::max
 #include "AVL.hpp"
 
 
@@ -209,7 +210,7 @@ nodo *AVLtree::checkK(nodo *punto, queue <int> dirs){//dirs[i]=0-->NO ASIGNADO; 
       else if (a==2 && b==2) {
         rotRR(punto);
       }
-      return punto;
+      return punto -> Parent;
     }else{
       if (dirs.size() >= 2) {
         dirs.pop();
@@ -225,6 +226,27 @@ nodo *AVLtree::checkK(nodo *punto, queue <int> dirs){//dirs[i]=0-->NO ASIGNADO; 
   }
 
 }
+
+void AVLtree::actualizarH(nodo *punto){
+  if (punto == NULL) {
+    if (punto -> LC == NULL) {
+      punto -> hI = 0;
+    } else {
+      punto -> hI = std::max(punto -> LC ->hI, punto -> LC ->hD)+1;
+    }
+    if (punto -> RC == NULL) {
+      punto -> hD = 0;
+    } else {
+      punto -> hD = std::max(punto -> RC ->hI, punto -> RC ->hD)+1;
+    }
+    actualizarH(punto -> Parent);
+
+  } else {
+    //haga algo
+  }
+}
+
+
 
 
 

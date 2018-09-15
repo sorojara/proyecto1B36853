@@ -37,6 +37,7 @@ public:
   void rotRL(nodo *punto);
   void rotLR(nodo *punto);
   nodo *checkK(nodo *punto, queue <int> dirs);
+  void actualizarH(nodo *punto);
 };
 
 #endif
