@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <ctype.h>
 #include <math.h>
+#include <queue>
 #include "AVL.hpp"
 
 
@@ -14,7 +15,8 @@ nodo::nodo(string nom, int ced){
   LC = NULL;
   RC = NULL;
   Parent = NULL;
-  h=1;
+  hI=0;
+  hD=0;
 }
 
 nodo::nodo(string nom, int ced, nodo *pad){
@@ -23,7 +25,9 @@ nodo::nodo(string nom, int ced, nodo *pad){
   LC = NULL;
   RC = NULL;
   Parent = pad;
-  h=(pad -> h) + 1;
+  hI=0;
+  hD=0;
+  //h=(pad -> h) + 1;
   if (data > pad -> data) {
     pad -> RC = this;
   } else {
@@ -180,6 +184,46 @@ void AVLtree::rotLR(nodo *punto){
     bufferY -> Parent = padre;
   }
   //agregar un actualizador de H recursivo
+}
+
+
+nodo *AVLtree::checkK(nodo *punto, queue <int> dirs){//dirs[i]=0-->NO ASIGNADO; dirs[i]=1-->Izq; dirs[i]=2-->Der
+
+  if (punto == NULL) {
+    return NULL;
+  }else {
+    int k = (punto -> hD) - (punto -> hI);
+    if (k>1 || k<-1) {
+      int a = dirs.front();
+      dirs.pop();
+      int b = dirs.front();
+      dirs.pop();
+      if (a==1 && b==1) {
+        rotLL(punto);
+      } else if (a==1 && b==2) {
+        rotRL(punto);
+      }
+      else if (a==2 && b==1) {
+        rotLR(punto);
+      }
+      else if (a==2 && b==2) {
+        rotRR(punto);
+      }
+      return punto;
+    }else{
+      if (dirs.size() >= 2) {
+        dirs.pop();
+      }
+      if (punto -> data > punto -> Parent -> data) {
+        dirs.push(2);
+      } else {
+        dirs.push(1);
+      }
+      return checkK(punto -> Parent, dirs);
+    }
+
+  }
+
 }
 
 

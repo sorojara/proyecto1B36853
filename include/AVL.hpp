@@ -6,6 +6,7 @@
 #include <stdlib.h>
 #include <ctype.h>
 #include <math.h>
+#include <queue>
 using namespace std;
 
 class nodo
@@ -13,8 +14,8 @@ class nodo
   public:
     void printInfo();
     int data;
-    //int k;
-    int h;
+    int hI;
+    int hD;
     string nombre;
     nodo *LC;
     nodo *RC;
@@ -35,6 +36,7 @@ public:
   void rotRR(nodo *punto);
   void rotRL(nodo *punto);
   void rotLR(nodo *punto);
+  nodo *checkK(nodo *punto, queue <int> dirs);
 };
 
 #endif
