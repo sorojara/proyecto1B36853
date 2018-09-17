@@ -30,6 +30,7 @@ class AVLtree
 //private:
 public:
   nodo *root;
+  int size;
   AVLtree();
   AVLtree(string nom, int ced);
   void rotLL(nodo *punto);

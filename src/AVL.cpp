@@ -46,6 +46,7 @@ void nodo::printInfo(){ //arreglar print de nulls
     std::cout << "Padre: " << Parent -> nombre << '\n';
   }
 
+  //std::cout << "Imprimir hijo izquierdo"<< '\n';
 
   if (LC == NULL) {
     std::cout << "LC: no hay hijo izquierdo " << endl;
@@ -64,10 +65,12 @@ void nodo::printInfo(){ //arreglar print de nulls
 
 AVLtree::AVLtree(){
   root = NULL;
+  size = 0;
 }
 
 AVLtree::AVLtree(string const nom, int const ced){
   root = new nodo (nom, ced);
+  size = 0;
   //cout << (void*)this << endl;
   //root = &nodo(nom, ced);
 }
@@ -215,10 +218,12 @@ nodo *AVLtree::checkK(nodo *punto, queue <int> dirs){//dirs[i]=0-->NO ASIGNADO; 
       if (dirs.size() >= 2) {
         dirs.pop();
       }
-      if (punto -> data > punto -> Parent -> data) {
-        dirs.push(2);
-      } else {
-        dirs.push(1);
+      if (punto -> Parent != NULL) {
+        if (punto -> data > punto -> Parent -> data) {
+          dirs.push(2);
+        } else {
+          dirs.push(1);
+        }
       }
       return checkK(punto -> Parent, dirs);
     }
@@ -311,11 +316,38 @@ void AVLtree::ubicar(string nom, int ced){
   }
 }
 
+int main()
+{
+  AVLtree prueba;
+  prueba.ubicar("Soro", 420);
+  prueba.ubicar("Espeon", 69);
+  prueba.ubicar("Umbreon", 42);
+  prueba.ubicar("Byron", 30);
+  prueba.ubicar("Leopoldo", 15);
+  prueba.ubicar("JoguiCaracoli", 49);
+
+
+  std::cout << "________________________" << '\n';
+  std::cout << "PRUEBA 1:" << '\n';
+  std::cout << "________________________" << '\n';
+  prueba.root -> printInfo();
+  std::cout << "________________________" << '\n';
+  prueba.root -> LC -> printInfo();
+  std::cout << "________________________" << '\n';
+  prueba.root -> RC -> printInfo();
+  std::cout << "________________________" << '\n';
+  prueba.root -> LC -> LC -> printInfo();
+  std::cout << "________________________" << '\n';
+  prueba.root -> RC -> LC -> printInfo();
+  std::cout << "________________________" << '\n';
+  prueba.root -> RC -> RC -> printInfo();
+
+}
 
 
 
 
-
+/*
 
 //Para pruebas de compilacion
 int main()
@@ -403,3 +435,5 @@ int main()
 
   return 0;
 }
+
+*/
