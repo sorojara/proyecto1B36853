@@ -44,6 +44,7 @@ public:
   nodo *encontrarPosicion(string nom, int ced, nodo *punto);
   int getSize();
   int getHeight();
+  int createTree(string archivo);
 };
 
 #endif

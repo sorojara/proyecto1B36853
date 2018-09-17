@@ -1,3 +1,4 @@
+#include <fstream>
 #include <iostream>
 #include <stdio.h>
 #include <stdlib.h>
@@ -342,6 +343,78 @@ int AVLtree::insert(string nom, int ced){
   }
 }
 
+int AVLtree::createTree(string archivo){
+  string dir = "misc/input/";
+  dir.append(archivo);
+  ifstream file(dir);
+  if (file.is_open()) {
+    std::string line;
+    while (getline(file, line)) {
+      //cout << line << '\n';
+      int ind = 0;
+      int cont= 0;
+      for (int j = 0; j < line.length(); j++) {
+          if (line[j]==',') {
+            if (cont == 0) {
+              ind = j;
+              cont ++;
+            }else{
+              std::cout << "ATENCION! Exceso de argumentos" << '\n';
+            }
+          }
+      }
+      string input1 = line.substr(0,ind);
+      string input2 = line.substr(ind+2); //si hay espacio; sino es un +1
+
+      int iValid = 1;
+
+      for (int i = 0; i < input2.length(); i++) {
+        if (!isdigit(input2[i])){
+          iValid = 0;
+        }
+      }
+
+      if (iValid == 0) {
+        std::cout << "ATENCION! Número de cédula ingresado es NO numérico" << '\n';
+      } else {
+        int a = stoi(input2);
+        insert(input1, a);
+      }
+    }
+  }
+  file.close();
+  return 0;
+}
+
+int main() {
+  AVLtree prueba;
+  prueba.createTree("datosPrueba.txt");
+  prueba.getSize();
+  prueba.getHeight();
+
+  std::cout << "________________________" << '\n';
+  std::cout << "PRUEBA 1:" << '\n';
+  std::cout << "________________________" << '\n';
+  prueba.root -> printInfo();
+  std::cout << "________________________" << '\n';
+  prueba.root -> LC -> printInfo();
+  std::cout << "________________________" << '\n';
+  prueba.root -> RC -> printInfo();
+  std::cout << "________________________" << '\n';
+  prueba.root -> LC -> LC -> printInfo();
+  std::cout << "________________________" << '\n';
+  prueba.root -> RC -> LC -> printInfo();
+  std::cout << "________________________" << '\n';
+  prueba.root -> RC -> RC -> printInfo();
+
+  return 0;
+}
+
+
+//prueba 2
+
+/*
+
 int main()
 {
   AVLtree prueba;
@@ -373,8 +446,10 @@ int main()
 
 }
 
+*/
 
 
+//prueba 1
 
 /*
 
