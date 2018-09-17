@@ -332,15 +332,25 @@ void AVLtree::ubicar(string nom, int ced){
   }
 }
 
+int AVLtree::insert(string nom, int ced){
+  if (ced >= 100000000 && ced <=999999999) {
+    ubicar(nom, ced);
+    return 0;
+  }else{
+    std::cout << "VALORES DE INSERCION INVALIDOS" << '\n';
+    return 1;
+  }
+}
+
 int main()
 {
   AVLtree prueba;
-  prueba.ubicar("Soro", 420);
-  prueba.ubicar("Espeon", 69);
-  prueba.ubicar("Umbreon", 42);
-  prueba.ubicar("Byron", 30);
-  prueba.ubicar("Leopoldo", 15);
-  prueba.ubicar("JoguiCaracoli", 49);
+  prueba.insert("Soro", 100000420);
+  prueba.insert("Espeon", 100000069);
+  prueba.insert("Umbreon", 100000042);
+  prueba.insert("Byron", 100000030);
+  prueba.insert("Leopoldo", 100000015);
+  prueba.insert("JoguiCaracoli", 100000049);
 
   prueba.getSize();
   prueba.getHeight();

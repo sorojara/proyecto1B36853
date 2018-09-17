@@ -9,6 +9,7 @@ PROJECT = soremesis420
 
 OBJDIR = build
 SRCDIR = src
+TESTDIR = test
 
 
 LIBS =
