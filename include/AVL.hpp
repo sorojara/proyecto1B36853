@@ -41,6 +41,8 @@ public:
   void actualizarH(nodo *punto);
   void ubicar(string nom, int ced);
   nodo *encontrarPosicion(string nom, int ced, nodo *punto);
+  int getSize();
+  int getHeight();
 };
 
 #endif

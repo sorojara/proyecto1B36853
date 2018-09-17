@@ -190,6 +190,21 @@ void AVLtree::rotLR(nodo *punto){
   //agregar un actualizador de H recursivo
 }
 
+int AVLtree::getSize(){
+  std::cout << "Size: " << size << '\n';
+  return size;
+}
+
+int AVLtree::getHeight(){
+  int a = 0;
+  if (root != NULL) {
+    a = std::max(root -> hI,root -> hD)+1;
+  }
+
+  std::cout << "Height: " << a << '\n';
+  return size;
+}
+
 
 nodo *AVLtree::checkK(nodo *punto, queue <int> dirs){//dirs[i]=0-->NO ASIGNADO; dirs[i]=1-->Izq; dirs[i]=2-->Der
 
@@ -277,6 +292,7 @@ nodo *AVLtree::encontrarPosicion(string nom, int ced, nodo *punto){
 
 
 void AVLtree::ubicar(string nom, int ced){
+  size ++;
   if (root == NULL){
     root = new nodo (nom, ced);
   }else{
@@ -325,6 +341,9 @@ int main()
   prueba.ubicar("Byron", 30);
   prueba.ubicar("Leopoldo", 15);
   prueba.ubicar("JoguiCaracoli", 49);
+
+  prueba.getSize();
+  prueba.getHeight();
 
 
   std::cout << "________________________" << '\n';
