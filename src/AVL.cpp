@@ -37,6 +37,22 @@ nodo::nodo(string nom, int ced, nodo *pad){
   }
 }
 
+
+nodo::~nodo(){
+
+  if(LC != NULL){
+    LC -> ~nodo();
+  }
+  if(RC != NULL){
+    RC -> ~nodo();
+  }
+  delete this;
+
+
+
+}
+
+
 void nodo::printInfo(){ //arreglar print de nulls
   std::cout << "Cedula: " << data << '\n';
   std::cout << "Nombre: " << nombre << '\n';
@@ -74,6 +90,24 @@ AVLtree::AVLtree(string const nom, int const ced){
   size = 0;
   //cout << (void*)this << endl;
   //root = &nodo(nom, ced);
+}
+
+AVLtree::~AVLtree(){
+  limpiarMemoria(root);
+
+}
+
+int AVLtree::limpiarMemoria(nodo *punto){
+  nodo *hijoIzq = punto -> LC;
+  nodo *hijoDer = punto -> RC;
+  if (hijoIzq != NULL) {
+    limpiarMemoria(hijoIzq);
+  }
+  if (hijoDer != NULL) {
+    limpiarMemoria(hijoDer);
+  }
+  delete punto;
+  return 0;
 }
 
 void AVLtree::rotLL(nodo *punto){
@@ -407,6 +441,10 @@ int main() {
   std::cout << "________________________" << '\n';
   prueba.root -> RC -> RC -> printInfo();
 
+  prueba.limpiarMemoria(prueba.root);
+  //delete prueba.root;
+
+  std::cout << "FIN" << '\n';
   return 0;
 }
 

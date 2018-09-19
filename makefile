@@ -39,6 +39,9 @@ git:
 	git commit -m mensaje
 	git push
 
+run:
+	./soremesis420
+
 
 define make-repo
 	mkdir -p $(OBJDIR)

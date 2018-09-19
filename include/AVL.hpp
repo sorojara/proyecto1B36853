@@ -22,6 +22,7 @@ class nodo
     nodo *Parent;
     nodo(string nom, int ced);
     nodo(string nom, int ced, nodo *pad);
+    ~nodo();
 
   };
 
@@ -33,6 +34,7 @@ public:
   int size;
   AVLtree();
   AVLtree(string nom, int ced);
+  ~AVLtree();
   void rotLL(nodo *punto);
   void rotRR(nodo *punto);
   void rotRL(nodo *punto);
@@ -42,9 +44,11 @@ public:
   void ubicar(string nom, int ced);
   int insert(string nom, int ced);
   nodo *encontrarPosicion(string nom, int ced, nodo *punto);
+  int limpiarMemoria(nodo *punto);
   int getSize();
   int getHeight();
   int createTree(string archivo);
+
 };
 
 #endif
