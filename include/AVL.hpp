@@ -13,6 +13,7 @@ class nodo
   {
   public:
     void printInfo();
+    int isLeaf();
     int data;
     int hI;
     int hD;
@@ -34,7 +35,15 @@ public:
   int size;
   AVLtree();
   AVLtree(string nom, int ced);
-  ~AVLtree();
+  //~AVLtree();
+  int insert(string nom, int ced);//UNITTEST
+  int limpiarMemoria();
+  int getSize();//UNITTEST E IMPLEMENTAR PARAMETRO DE SALIDA
+  int getHeight();//UNITTEST E IMPLEMENTAR PARAMETRO DE SALIDA
+  int createTree(string archivo);//UNITTEST Y MANEJO DE ERRORES
+  int salidasArbol();//UNITEST Y PROCEDIMIENTO
+
+private:
   void rotLL(nodo *punto);
   void rotRR(nodo *punto);
   void rotRL(nodo *punto);
@@ -42,12 +51,9 @@ public:
   nodo *checkK(nodo *punto, queue <int> dirs);
   void actualizarH(nodo *punto);
   void ubicar(string nom, int ced);
-  int insert(string nom, int ced);
   nodo *encontrarPosicion(string nom, int ced, nodo *punto);
-  int limpiarMemoria(nodo *punto);
-  int getSize();
-  int getHeight();
-  int createTree(string archivo);
+  nodo *getMayor(nodo *punto);
+  nodo *getMenor(nodo *punto);
 
 };
 

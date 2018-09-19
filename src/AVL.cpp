@@ -41,16 +41,22 @@ nodo::nodo(string nom, int ced, nodo *pad){
 nodo::~nodo(){
 
   if(LC != NULL){
-    LC -> ~nodo();
+    if (LC -> isLeaf()==1) {
+      delete LC;
+    } else {
+      LC -> ~nodo();
+    }
   }
   if(RC != NULL){
-    RC -> ~nodo();
+    if (RC -> isLeaf()==1) {
+      delete RC;
+    } else {
+      RC -> ~nodo();
+    }
   }
-  delete this;
-
-
-
+  //delete this;
 }
+
 
 
 void nodo::printInfo(){ //arreglar print de nulls
@@ -80,6 +86,14 @@ void nodo::printInfo(){ //arreglar print de nulls
 
 }
 
+int nodo::isLeaf(){
+  if (LC == NULL && RC == NULL) {
+    return 1;
+  } else {
+    return 2;
+  }
+}
+
 AVLtree::AVLtree(){
   root = NULL;
   size = 0;
@@ -92,21 +106,18 @@ AVLtree::AVLtree(string const nom, int const ced){
   //root = &nodo(nom, ced);
 }
 
+/*
+
 AVLtree::~AVLtree(){
   limpiarMemoria(root);
 
 }
+*/
 
-int AVLtree::limpiarMemoria(nodo *punto){
-  nodo *hijoIzq = punto -> LC;
-  nodo *hijoDer = punto -> RC;
-  if (hijoIzq != NULL) {
-    limpiarMemoria(hijoIzq);
-  }
-  if (hijoDer != NULL) {
-    limpiarMemoria(hijoDer);
-  }
-  delete punto;
+int AVLtree::limpiarMemoria(){
+  delete root;
+  root = NULL;
+  size = 0;
   return 0;
 }
 
@@ -372,7 +383,7 @@ int AVLtree::insert(string nom, int ced){
     ubicar(nom, ced);
     return 0;
   }else{
-    std::cout << "VALORES DE INSERCION INVALIDOS" << '\n';
+    std::cout << "VALORES DE INSERCION INVALIDOS EN: "<< nom << ", " << ced << '\n';
     return 1;
   }
 }
@@ -409,7 +420,7 @@ int AVLtree::createTree(string archivo){
       }
 
       if (iValid == 0) {
-        std::cout << "ATENCION! Número de cédula ingresado es NO numérico" << '\n';
+        std::cout << "ATENCION! Número de cédula ingresado es NO numérico en: " << line << '\n';
       } else {
         int a = stoi(input2);
         insert(input1, a);
@@ -418,6 +429,54 @@ int AVLtree::createTree(string archivo){
   }
   file.close();
   return 0;
+}
+
+nodo *AVLtree::getMayor(nodo *punto){
+  if (root == NULL) {
+    //std::cout << "EL ARBOL ESTA VACIO" << '\n';
+    return NULL;
+  } else {
+    if (punto -> RC == NULL) {
+      return punto;
+    } else {
+      return getMayor(punto -> RC);
+    }
+  }
+
+}
+
+nodo *AVLtree::getMenor(nodo *punto){
+  if (root == NULL) {
+    //std::cout << "EL ARBOL ESTA VACIO" << '\n';
+    return NULL;
+  } else {
+    if (punto -> LC == NULL) {
+      return punto;
+    } else {
+      return getMenor(punto -> LC);
+    }
+  }
+}
+
+int AVLtree::salidasArbol(){
+  nodo *buffer = getMayor(root);
+  if (buffer == NULL) {
+    std::cout << "EL ARBOL ESTA VACIO; No se crea el archivo de Salidas" << '\n';
+    return 1;
+  } else {
+    string mensaje = "MAYOR: ";
+    mensaje.append(buffer -> nombre);
+    mensaje.append("; ");
+    mensaje.append("\n\n");
+    mensaje.append(to_string(buffer -> data));
+    buffer = getMenor(root);
+    mensaje.append("MENOR: ");
+    mensaje.append(buffer -> nombre);
+    mensaje.append("; ");
+    mensaje.append(to_string(buffer -> data));
+
+    return 0;
+  }
 }
 
 int main() {
@@ -441,8 +500,15 @@ int main() {
   std::cout << "________________________" << '\n';
   prueba.root -> RC -> RC -> printInfo();
 
-  prueba.limpiarMemoria(prueba.root);
-  //delete prueba.root;
+
+  std::cout << "\n\n\n";
+
+  prueba.limpiarMemoria();
+  prueba.insert("Limpio", 111111111);
+  std::cout << "________________________" << '\n';
+  std::cout << "PRUEBA 2:" << '\n';
+  prueba.root -> printInfo();
+
 
   std::cout << "FIN" << '\n';
   return 0;
