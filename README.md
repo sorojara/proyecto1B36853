@@ -9,3 +9,5 @@ Instrucciones Makefile:
 3. make unittest: Compilacion de las Unit Test
 4. make run_unittest: Ejecucion de las Unit Test
 5. make help: Muestra archivo de ayuda
+
+Funciones:
