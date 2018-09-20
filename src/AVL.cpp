@@ -509,6 +509,7 @@ int AVLtree::salidasArbol(){
     mensaje.append(to_string(buffer -> data));
 
     writeFile("misc/output/max_and_min_id.txt", mensaje);
+    std::cout << '\n' << mensaje << '\n';
 
     return 0;
   }
