@@ -44,8 +44,8 @@ run:
 	./soremesis420
 
 unittest:
-	$(CC) $(OPTS) $(TESTDIR)AVL.cpp $(TESTDIR)positive.cpp -o build/positive
-	$(CC) $(OPTS) $(TESTDIR)AVL.cpp $(TESTDIR)negative.cpp -o build/negative
+	$(CC) $(OPTS) src/AVL.cpp $(TESTDIR)positive.cpp -o build/positive
+	$(CC) $(OPTS) src/AVL.cpp $(TESTDIR)negative.cpp -o build/negative
 
 run_unittest:
 	echo Pruebas positivas

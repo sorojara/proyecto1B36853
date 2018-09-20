@@ -515,6 +515,7 @@ int AVLtree::salidasArbol(){
   }
 }
 
+/*
 int main() {
   AVLtree prueba;
   prueba.createTree("lista_100.txt");
@@ -551,6 +552,7 @@ int main() {
   std::cout << "FIN" << '\n';
   return 0;
 }
+*/
 
 
 //prueba 2
