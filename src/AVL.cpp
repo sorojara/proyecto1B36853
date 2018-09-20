@@ -236,19 +236,30 @@ void AVLtree::rotLR(nodo *punto){
   //agregar un actualizador de H recursivo
 }
 
-int AVLtree::getSize(){
-  std::cout << "Size: " << size << '\n';
-  return size;
+int AVLtree::getSize(int *salida){
+  if (root != NULL) {
+    std::cout << "Size: " << size << '\n';
+    *salida = size;
+    return 0;
+  } else {
+    std::cout << "ARBOL VACION" << '\n';
+    return 1;
+  }
+
 }
 
-int AVLtree::getHeight(){
+int AVLtree::getHeight(int *salida){
   int a = 0;
   if (root != NULL) {
     a = std::max(root -> hI,root -> hD)+1;
+    *salida = a;
+    std::cout << "Height: " << a << '\n';
+    return 0;
+  }else {
+    a=0;
+    std::cout << "Height: " << a << '\n';
+    return 1;
   }
-
-  std::cout << "Height: " << a << '\n';
-  return size;
 }
 
 
@@ -388,47 +399,60 @@ int AVLtree::insert(string nom, int ced){
   }
 }
 
+bool AVLtree::is_file_exist(const char *fileName)
+{
+    std::ifstream infile(fileName);
+    return infile.good();
+}
+
 int AVLtree::createTree(string archivo){
   string dir = "misc/input/";
   dir.append(archivo);
-  ifstream file(dir);
-  if (file.is_open()) {
-    std::string line;
-    while (getline(file, line)) {
-      //cout << line << '\n';
-      int ind = 0;
-      int cont= 0;
-      for (int j = 0; j < line.length(); j++) {
-          if (line[j]==',') {
-            if (cont == 0) {
-              ind = j;
-              cont ++;
-            }else{
-              std::cout << "ATENCION! Exceso de argumentos" << '\n';
+  if (is_file_exist(dir.c_str())) {
+    ifstream file(dir);
+    if (file.is_open()) {
+      std::string line;
+      while (getline(file, line)) {
+        //cout << line << '\n';
+        int ind = 0;
+        int cont= 0;
+        for (int j = 0; j < line.length(); j++) {
+            if (line[j]==',') {
+              if (cont == 0) {
+                ind = j;
+                cont ++;
+              }else{
+                std::cout << "ATENCION! Exceso de argumentos" << '\n';
+              }
             }
+        }
+        string input1 = line.substr(0,ind);
+        string input2 = line.substr(ind+2); //si hay espacio; sino es un +1
+
+        int iValid = 1;
+
+        for (int i = 0; i < input2.length(); i++) {
+          if (!isdigit(input2[i])){
+            iValid = 0;
           }
-      }
-      string input1 = line.substr(0,ind);
-      string input2 = line.substr(ind+2); //si hay espacio; sino es un +1
+        }
 
-      int iValid = 1;
-
-      for (int i = 0; i < input2.length(); i++) {
-        if (!isdigit(input2[i])){
-          iValid = 0;
+        if (iValid == 0) {
+          std::cout << "ATENCION! Número de cédula ingresado es NO numérico en: " << line << '\n';
+        } else {
+          int a = stoi(input2);
+          insert(input1, a);
         }
       }
-
-      if (iValid == 0) {
-        std::cout << "ATENCION! Número de cédula ingresado es NO numérico en: " << line << '\n';
-      } else {
-        int a = stoi(input2);
-        insert(input1, a);
-      }
     }
+    file.close();
+    return 0;
+  } else {
+    std::cout << "ARCHIVO NO EXISTE" << '\n';
+    return 1;
   }
-  file.close();
-  return 0;
+
+
 }
 
 nodo *AVLtree::getMayor(nodo *punto){
@@ -458,6 +482,15 @@ nodo *AVLtree::getMenor(nodo *punto){
   }
 }
 
+int AVLtree::writeFile (string archivo, string mensaje)
+{
+  ofstream myfile;
+  myfile.open (archivo);
+  myfile << mensaje;
+  myfile.close();
+  return 0;
+}
+
 int AVLtree::salidasArbol(){
   nodo *buffer = getMayor(root);
   if (buffer == NULL) {
@@ -467,13 +500,15 @@ int AVLtree::salidasArbol(){
     string mensaje = "MAYOR: ";
     mensaje.append(buffer -> nombre);
     mensaje.append("; ");
-    mensaje.append("\n\n");
     mensaje.append(to_string(buffer -> data));
+    mensaje.append("\n\n");
     buffer = getMenor(root);
     mensaje.append("MENOR: ");
     mensaje.append(buffer -> nombre);
     mensaje.append("; ");
     mensaje.append(to_string(buffer -> data));
+
+    writeFile("misc/output/max_and_min_id.txt", mensaje);
 
     return 0;
   }
@@ -481,9 +516,9 @@ int AVLtree::salidasArbol(){
 
 int main() {
   AVLtree prueba;
-  prueba.createTree("datosPrueba.txt");
-  prueba.getSize();
-  prueba.getHeight();
+  prueba.createTree("lista_100.txt");
+  //prueba.getSize();
+  //prueba.getHeight();
 
   std::cout << "________________________" << '\n';
   std::cout << "PRUEBA 1:" << '\n';
@@ -500,10 +535,12 @@ int main() {
   std::cout << "________________________" << '\n';
   prueba.root -> RC -> RC -> printInfo();
 
+  prueba.salidasArbol();
 
   std::cout << "\n\n\n";
 
   prueba.limpiarMemoria();
+
   prueba.insert("Limpio", 111111111);
   std::cout << "________________________" << '\n';
   std::cout << "PRUEBA 2:" << '\n';

@@ -1,0 +1,3 @@
+MAYOR: Esteban Fernandez Ocampo; 100000099
+
+MENOR: Andrea Barboza Guevara; 100000005

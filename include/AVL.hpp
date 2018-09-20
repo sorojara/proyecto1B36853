@@ -38,10 +38,10 @@ public:
   //~AVLtree();
   int insert(string nom, int ced);//UNITTEST
   int limpiarMemoria();
-  int getSize();//UNITTEST E IMPLEMENTAR PARAMETRO DE SALIDA
-  int getHeight();//UNITTEST E IMPLEMENTAR PARAMETRO DE SALIDA
-  int createTree(string archivo);//UNITTEST Y MANEJO DE ERRORES
-  int salidasArbol();//UNITEST Y PROCEDIMIENTO
+  int getSize(int *salida);//UNITTEST 
+  int getHeight(int *salida);//UNITTEST
+  int createTree(string archivo);//UNITTEST
+  int salidasArbol();//UNITEST
 
 private:
   void rotLL(nodo *punto);
@@ -54,6 +54,8 @@ private:
   nodo *encontrarPosicion(string nom, int ced, nodo *punto);
   nodo *getMayor(nodo *punto);
   nodo *getMenor(nodo *punto);
+  int writeFile (string archivo, string mensaje);
+  bool is_file_exist(const char *fileName);
 
 };
 
