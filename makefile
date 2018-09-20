@@ -53,6 +53,9 @@ run_unittest:
 	echo Pruebas negativas
 	./build/negative
 
+help:
+	cat README.md
+
 define make-repo
 	mkdir -p $(OBJDIR)
 	for dir in $(SRCDIRS); \
