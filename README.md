@@ -11,3 +11,9 @@ Instrucciones Makefile:
 5. make help: Muestra archivo de ayuda
 
 Funciones:
+1. insert():
+2. createTree():
+3. getSize(int *salida) :
+4. getHeight(int *salida) :
+5. salidasArbol():
+6. limpiarMemoria():
