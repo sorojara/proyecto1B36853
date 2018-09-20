@@ -4,12 +4,13 @@ OPTS = -std=c++14 -Iinclude/
 
 
 
+
 PROJECT = soremesis420
 
 
 OBJDIR = build
 SRCDIR = src
-TESTDIR = test
+TESTDIR = test/
 
 
 LIBS =
@@ -42,6 +43,15 @@ git:
 run:
 	./soremesis420
 
+unittest:
+	$(CC) $(OPTS) $(TESTDIR)AVL.cpp $(TESTDIR)positive.cpp -o build/positive
+	$(CC) $(OPTS) $(TESTDIR)AVL.cpp $(TESTDIR)negative.cpp -o build/negative
+
+run_unittest:
+	echo Pruebas positivas
+	./build/positive
+	echo Pruebas negativas
+	./build/negative
 
 define make-repo
 	mkdir -p $(OBJDIR)
