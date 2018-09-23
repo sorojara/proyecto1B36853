@@ -32,6 +32,7 @@ int main(){
   std::cout << "Duracion: " << elapsed_secs << '\n';
   tiempos.append("100 ");
   tiempos.append(to_string(elapsed_secs));
+  tiempos.append("\n");
   prueba.limpiarMemoria();
 
   begin = clock();
@@ -41,6 +42,7 @@ int main(){
   std::cout << "Duracion: " << elapsed_secs << '\n';
   tiempos.append("1000 ");
   tiempos.append(to_string(elapsed_secs));
+  tiempos.append("\n");
   prueba.limpiarMemoria();
 
   begin = clock();
@@ -50,6 +52,7 @@ int main(){
   std::cout << "Duracion: " << elapsed_secs << '\n';
   tiempos.append("5000 ");
   tiempos.append(to_string(elapsed_secs));
+  tiempos.append("\n");
   prueba.limpiarMemoria();
 
   begin = clock();
@@ -59,7 +62,16 @@ int main(){
   std::cout << "Duracion: " << elapsed_secs << '\n';
   tiempos.append("10000 ");
   tiempos.append(to_string(elapsed_secs));
+  tiempos.append("\n");
   prueba.limpiarMemoria();
+
+  std::cout << "____________________" << '\n';
+  std::cout << tiempos << '\n';
+
+  ofstream myfile;
+  myfile.open ("running_times.txt");
+  myfile << tiempos;
+  myfile.close();
 
 
 

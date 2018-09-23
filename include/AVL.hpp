@@ -38,7 +38,7 @@ public:
   //~AVLtree();
   int insert(string nom, int ced);//UNITTEST
   int limpiarMemoria();
-  int getSize(int *salida);//UNITTEST 
+  int getSize(int *salida);//UNITTEST
   int getHeight(int *salida);//UNITTEST
   int createTree(string archivo);//UNITTEST
   int salidasArbol();//UNITEST

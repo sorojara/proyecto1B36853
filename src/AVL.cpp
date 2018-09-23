@@ -207,7 +207,8 @@ void AVLtree::rotRL(nodo *punto){
     } else {
       padre -> LC = bufferX;
     }
-    bufferY -> Parent = padre;
+    //bufferY -> Parent = padre;
+    bufferX -> Parent = padre;
   }
   //agregar un actualizador de H recursivo
 }
@@ -236,7 +237,8 @@ void AVLtree::rotLR(nodo *punto){
     } else {
       padre -> LC = bufferX;
     }
-    bufferY -> Parent = padre;
+    //bufferY -> Parent = padre;
+    bufferX -> Parent = padre;
   }
   //agregar un actualizador de H recursivo
 }
@@ -270,10 +272,6 @@ int AVLtree::getHeight(int *salida){
 
 nodo *AVLtree::checkK(nodo *punto, queue <int> dirs){//dirs[i]=0-->NO ASIGNADO; dirs[i]=1-->Izq; dirs[i]=2-->Der
 
-  if (punto != NULL && punto -> data == 100000578) {
-    punto -> printInfo();
-    std::cout << "___________\n" << '\n';
-  }
 
   //DEBUGGING
   /*
@@ -287,6 +285,13 @@ nodo *AVLtree::checkK(nodo *punto, queue <int> dirs){//dirs[i]=0-->NO ASIGNADO; 
     }
     //
     std::cout << "k = " << (punto -> hD) - (punto -> hI) <<'\n';
+    punto -> printInfo();
+    std::cout << "___________\n" << '\n';
+  }
+  */
+
+  /*
+  if (punto != NULL && punto -> data == 100000578) {
     punto -> printInfo();
     std::cout << "___________\n" << '\n';
   }
@@ -467,8 +472,14 @@ int AVLtree::createTree(string archivo){
         if (iValid == 0) {
           std::cout << "ATENCION! Número de cédula ingresado es NO numérico en: " << line << '\n';
         } else {
-          int a = stoi(input2);
-          insert(input1, a);
+          //std::cout << input2 << '\n';
+          if (input2.length() < 10) {
+            int a = stoi(input2);
+            insert(input1, a);
+          }else{
+            std::cout << "ATENCION! Cedula demasiado grande" << '\n';
+          }
+
         }
       }
     }
