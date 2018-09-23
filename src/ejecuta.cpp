@@ -7,7 +7,7 @@
 
 int main(){
   AVLtree prueba;
-  prueba.createTree("lista_100.txt");
+  prueba.createTree("lista_1000.txt");
   //prueba.getSize();
   //prueba.getHeight();
   /*

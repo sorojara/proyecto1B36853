@@ -29,6 +29,7 @@ $(OBJDIR)/%.o: $(SRCDIR)/%.cpp
 
 clean:
 	rm $(PROJECT) $(OBJDIR) -Rf
+	mkdir $(OBJDIR)
 
 buildrepo:
 	@$(call make-repo)
@@ -52,6 +53,10 @@ run_unittest:
 	./build/positive
 	echo Pruebas negativas
 	./build/negative
+
+times:
+	$(CC) $(OPTS) src/AVL.cpp $(TESTDIR)tiempos.cpp -o build/tiempos
+	./build/tiempos
 
 help:
 	cat README.md

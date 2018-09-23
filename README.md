@@ -13,7 +13,7 @@ Instrucciones Makefile:
 Funciones:
 1. insert():
 2. createTree():
-3. getSize(int *salida) :
-4. getHeight(int *salida) :
+3. getSize(int *salida):
+4. getHeight(int *salida):
 5. salidasArbol():
 6. limpiarMemoria():

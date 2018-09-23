@@ -179,6 +179,11 @@ void AVLtree::rotRR(nodo *punto){
 }
 
 void AVLtree::rotRL(nodo *punto){
+  //std::cout << "Nodo: " << (size+1) <<'\n';
+  if (size == 160) {
+    punto -> printInfo();
+  }
+
   nodo *padre = punto -> Parent;
   nodo *bufferY = punto -> RC;
   nodo *bufferX = bufferY -> LC;
@@ -264,6 +269,28 @@ int AVLtree::getHeight(int *salida){
 
 
 nodo *AVLtree::checkK(nodo *punto, queue <int> dirs){//dirs[i]=0-->NO ASIGNADO; dirs[i]=1-->Izq; dirs[i]=2-->Der
+
+  if (punto != NULL && punto -> data == 100000578) {
+    punto -> printInfo();
+    std::cout << "___________\n" << '\n';
+  }
+
+  //DEBUGGING
+  /*
+  if (size == 160) {
+    std::cout << "HI = " << (punto -> hI) <<'\n';
+    std::cout << "HD = " << (punto -> hD) <<'\n';
+
+    if (dirs.size()>=1) {
+      std::cout << "dirs[0] =" << dirs.front() <<'\n';
+      std::cout << "dirs[1] =" << dirs.back() <<'\n';
+    }
+    //
+    std::cout << "k = " << (punto -> hD) - (punto -> hI) <<'\n';
+    punto -> printInfo();
+    std::cout << "___________\n" << '\n';
+  }
+  */
 
   if (punto == NULL) {
     return NULL;
@@ -383,7 +410,7 @@ void AVLtree::ubicar(string nom, int ced){
       }
       actualizarH(buffer2);
     } else {
-      //actualizarH(buffer);
+      actualizarH(buffer);
     }
 
   }
