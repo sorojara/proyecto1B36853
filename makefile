@@ -14,7 +14,7 @@ TESTDIR = test/
 
 
 LIBS =
-
+MENSAJE = El stress test ha sido compilado, pero no es ejecutado a menos que el usuario así lo desee por medio del comando: "make stress". Esto para proteger la integridad de la memoria y solo ejecutarla en caso de quererlo asi
 
 SRCS    = $(shell find $(SRCDIR) -name '*.cpp')
 SRCDIRS = $(shell find . -name '*.cpp' | dirname {} | sort | uniq | sed 's/\/$(SRCDIR)//g' )
@@ -47,6 +47,7 @@ run:
 unittest:
 	$(CC) $(OPTS) src/AVL.cpp $(TESTDIR)positive.cpp -o build/positive
 	$(CC) $(OPTS) src/AVL.cpp $(TESTDIR)negative.cpp -o build/negative
+	$(CC) $(OPTS) src/AVL.cpp $(TESTDIR)estructura.cpp -o build/estructura
 	$(CC) $(OPTS) src/AVL.cpp $(TESTDIR)pruebaMemoria.cpp -o build/pruebaMemoria
 
 run_unittest:
@@ -54,10 +55,18 @@ run_unittest:
 	./build/positive
 	echo Pruebas negativas
 	./build/negative
+	echo Prueba de estructura
+	./build/estructura
+	echo
+	echo $(MENSAJE)
 
 times:
 	$(CC) $(OPTS) src/AVL.cpp $(TESTDIR)tiempos.cpp -o build/tiempos
 	./build/tiempos
+
+stress:
+	echo Stress Test
+	./build/pruebaMemoria
 
 help:
 	cat README.md

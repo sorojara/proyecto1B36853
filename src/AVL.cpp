@@ -58,7 +58,7 @@ nodo::~nodo(){
 }
 
 
-
+//metodo para imprimir informacion en las pruebas
 void nodo::printInfo(){ //arreglar print de nulls
   std::cout << "Cedula: " << data << '\n';
   std::cout << "Nombre: " << nombre << '\n';
@@ -86,6 +86,7 @@ void nodo::printInfo(){ //arreglar print de nulls
 
 }
 
+//chequeo de condicion hoja de nodo
 int nodo::isLeaf(){
   if (LC == NULL && RC == NULL) {
     return 1;
@@ -114,6 +115,7 @@ AVLtree::~AVLtree(){
 }
 */
 
+//Metodo para liberar la memoria en un arbol
 int AVLtree::limpiarMemoria(){
   delete root;
   root = NULL;
@@ -121,6 +123,7 @@ int AVLtree::limpiarMemoria(){
   return 0;
 }
 
+//rotacion LL de un nodo
 void AVLtree::rotLL(nodo *punto){
   nodo *padre = punto -> Parent;
   nodo *bufferY = punto -> LC;
@@ -150,6 +153,7 @@ void AVLtree::rotLL(nodo *punto){
 
 }
 
+//rotacion RR de un nodo
 void AVLtree::rotRR(nodo *punto){
   nodo *padre = punto -> Parent;
   nodo *bufferY = punto -> RC;
@@ -178,6 +182,7 @@ void AVLtree::rotRR(nodo *punto){
   //agregar un actualizador de H recursivo
 }
 
+//Rotacion RL de un nodo
 void AVLtree::rotRL(nodo *punto){
   //std::cout << "Nodo: " << (size+1) <<'\n';
   if (size == 160) {
@@ -213,6 +218,7 @@ void AVLtree::rotRL(nodo *punto){
   //agregar un actualizador de H recursivo
 }
 
+//rotacion LR en un Nodo
 void AVLtree::rotLR(nodo *punto){
   nodo *padre = punto -> Parent;
   nodo *bufferY = punto -> LC;
@@ -243,18 +249,20 @@ void AVLtree::rotLR(nodo *punto){
   //agregar un actualizador de H recursivo
 }
 
+//funcion que retorna en el puntero dado el tamaño total del arbol
 int AVLtree::getSize(int *salida){
   if (root != NULL) {
     std::cout << "Size: " << size << '\n';
     *salida = size;
     return 0;
   } else {
-    std::cout << "ARBOL VACION" << '\n';
+    std::cout << "ARBOL VACIO" << '\n';
     return 1;
   }
 
 }
 
+//funcion que retorna en el puntero dado la altura maxima del arbol
 int AVLtree::getHeight(int *salida){
   int a = 0;
   if (root != NULL) {
@@ -270,6 +278,7 @@ int AVLtree::getHeight(int *salida){
 }
 
 
+//funcion de uso interno que permite chequear el balance del arbol desde un nodo dado hasta root; y en caso de encontrar un nodo infractor -1<k>1 retornar su puntero; caso contrario retornar NULL
 nodo *AVLtree::checkK(nodo *punto, queue <int> dirs){//dirs[i]=0-->NO ASIGNADO; dirs[i]=1-->Izq; dirs[i]=2-->Der
 
 
@@ -336,6 +345,7 @@ nodo *AVLtree::checkK(nodo *punto, queue <int> dirs){//dirs[i]=0-->NO ASIGNADO; 
 
 }
 
+//funcion de uso interno para actualizar las alturas de cada nodo despues de realizar un cambio
 void AVLtree::actualizarH(nodo *punto){
   if (punto != NULL) {
     if (punto -> LC == NULL) {
@@ -355,6 +365,7 @@ void AVLtree::actualizarH(nodo *punto){
   }
 }
 
+//funcion de uso interno para colocar un nuevo nodo en la posicion libre correspondiente para realizar asi su respectiva rotacion en caso de ser necesario
 nodo *AVLtree::encontrarPosicion(string nom, int ced, nodo *punto){
   nodo *buffer = NULL;
   int lado = 0;
@@ -379,7 +390,7 @@ nodo *AVLtree::encontrarPosicion(string nom, int ced, nodo *punto){
   }
 }
 
-
+//funcion de uso interno para insertar nuevos nodos
 void AVLtree::ubicar(string nom, int ced){
   size ++;
   if (root == NULL){
@@ -421,6 +432,7 @@ void AVLtree::ubicar(string nom, int ced){
   }
 }
 
+//funcion para insertar un nuevo nodo con manejo de errores
 int AVLtree::insert(string nom, int ced){
   if (ced >= 100000000 && ced <=999999999) {
     ubicar(nom, ced);
@@ -431,12 +443,14 @@ int AVLtree::insert(string nom, int ced){
   }
 }
 
+//funcion de uso interno para chequear la existencia de un archivo para su lectura
 bool AVLtree::is_file_exist(const char *fileName)
 {
     std::ifstream infile(fileName);
     return infile.good();
 }
 
+//funcion para crear un arbol nuevo a partir de un archivo dado en formato: "NOMBRE, CEDULA \n"; y respectivo manejo de errores en cada linea
 int AVLtree::createTree(string archivo){
   string dir = "misc/input/";
   dir.append(archivo);
@@ -493,6 +507,7 @@ int AVLtree::createTree(string archivo){
 
 }
 
+//funcion de uso interno que recorre el arbol por hijo derecho hasta encontrar la mayor entrada
 nodo *AVLtree::getMayor(nodo *punto){
   if (root == NULL) {
     //std::cout << "EL ARBOL ESTA VACIO" << '\n';
@@ -507,6 +522,7 @@ nodo *AVLtree::getMayor(nodo *punto){
 
 }
 
+//funcion de uso interno que recorre el arbol por hijo izquierdo hasta encontrar la menor entrada
 nodo *AVLtree::getMenor(nodo *punto){
   if (root == NULL) {
     //std::cout << "EL ARBOL ESTA VACIO" << '\n';
@@ -520,6 +536,7 @@ nodo *AVLtree::getMenor(nodo *punto){
   }
 }
 
+//Funcion de uso interno para la escritura de archivos
 int AVLtree::writeFile (string archivo, string mensaje)
 {
   ofstream myfile;
@@ -529,6 +546,7 @@ int AVLtree::writeFile (string archivo, string mensaje)
   return 0;
 }
 
+//Funcion para encontrar mayor y menor del arbol e imprimirlo en archivo
 int AVLtree::salidasArbol(){
   nodo *buffer = getMayor(root);
   if (buffer == NULL) {
