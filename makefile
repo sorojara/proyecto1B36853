@@ -47,6 +47,7 @@ run:
 unittest:
 	$(CC) $(OPTS) src/AVL.cpp $(TESTDIR)positive.cpp -o build/positive
 	$(CC) $(OPTS) src/AVL.cpp $(TESTDIR)negative.cpp -o build/negative
+	$(CC) $(OPTS) src/AVL.cpp $(TESTDIR)pruebaMemoria.cpp -o build/pruebaMemoria
 
 run_unittest:
 	echo Pruebas positivas

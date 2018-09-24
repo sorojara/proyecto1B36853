@@ -8,7 +8,9 @@ Instrucciones Makefile:
 2. make run: Ejecucion del proyecto
 3. make unittest: Compilacion de las Unit Test
 4. make run_unittest: Ejecucion de las Unit Test
-5. make help: Muestra archivo de ayuda
+5. make times: compila y ejecuta las pruebas de tiempo y genera en carpeta principal un archivo de tiempos.
+6. make help: Muestra archivo de ayuda
+
 
 Funciones:
 1. insert():
